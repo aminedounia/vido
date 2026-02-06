@@ -55,7 +55,7 @@ export default function VideoPlayer() {
       <div className="d-flex justify-content-center align-items-center vh-50">
         <div className="text-center p-4 border rounded shadow-sm bg-light">
           <Frown size={48} className="mb-3 text-danger" />
-          <h5 className="mb-2">Video Non Trouver</h5>
+          <h5 className="mb-2">Video Non Trouvée</h5>
           <p className="text-muted mb-0">Try another category or search keyword.</p>
         </div>
       </div>
@@ -118,16 +118,17 @@ export default function VideoPlayer() {
           <source src={vi.videos.medium?.url || vi.videos.small.url} type="video/mp4" />
         </video>
 
+        {/* --- RESPONSIVE CONTROL BAR --- */}
         <div style={{
           position: "absolute", bottom: 0, left: 0, width: "100%",
-          background: "linear-gradient(transparent, rgba(0,0,0,0.8))",
-          display: "flex", alignItems: "center", padding: "10px", gap: 10, color: "#fff"
+          background: "linear-gradient(transparent, rgba(0,0,0,0.9))",
+          display: "flex", alignItems: "center", padding: "10px", gap: 8, color: "#fff"
         }}>
-          <button onClick={togglePlay} style={{ background: "none", border: "none", color: "#fff" }}>
-            {isPlaying ? <Pause size={20} fill="white" /> : <Play size={20} fill="white" />}
+          <button onClick={togglePlay} style={{ background: "none", border: "none", color: "#fff", padding: 0 }}>
+            {isPlaying ? <Pause size={22} fill="white" /> : <Play size={22} fill="white" />}
           </button>
 
-          <span style={{ fontSize: 12, minWidth: "85px" }}>
+          <span style={{ fontSize: "11px", whiteSpace: "nowrap" }}>
             {format(current)} / {format(duration)}
           </span>
 
@@ -144,18 +145,21 @@ export default function VideoPlayer() {
             }}
           />
 
-          <Volume2 size={20} />
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolume}
-            style={{ width: 60, accentColor: "red" }}
-          />
+          {/* Volume: Hidden on small mobile devices to save space */}
+          <div className="d-none d-sm-flex align-items-center gap-2">
+            <Volume2 size={18} />
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolume}
+              style={{ width: 50, accentColor: "red" }}
+            />
+          </div>
 
-          <button onClick={toggleFullscreen} style={{ background: "none", border: "none", color: "#fff" }}>
+          <button onClick={toggleFullscreen} style={{ background: "none", border: "none", color: "#fff", padding: 0 }}>
             <Maximize size={20} />
           </button>
         </div>
@@ -200,20 +204,20 @@ export default function VideoPlayer() {
                 className="position-fixed bottom-0 start-50 translate-middle-x mb-4 shadow-lg bg-dark text-white px-4 py-2 rounded-pill d-flex align-items-center"
                 style={{ zIndex: 1050 }}
               >
-                <span>Merci ! Like enregistré (localement) <HeartCrack size={16} className="text-danger ms-2" /></span>
+                <span>Merci ! Like enregistré <HeartCrack size={16} className="text-danger ms-2" /></span>
               </div>
             )}
 
             <div
               className="btn btn-outline-success btn-sm rounded-pill d-flex align-items-center px-3"
               onClick={() => {
-                if (window.confirm("Télécharger cette vidéo ?")) {
+                if (window.confirm("Voulez-vous télécharger cette vidéo ?")) {
                   download(vi.videos.medium?.url || vi.videos.small.url, vi.id);
                 }
               }}
               style={{ cursor: "pointer" }}
             >
-              <Download size={16} /> <span className="ms-2">Telecharger</span>
+              <Download size={16} /> <span className="ms-2">Télécharger</span>
             </div>
           </div>
         </div>
