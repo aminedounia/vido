@@ -204,7 +204,7 @@ export default function VideoPlayer() {
                 className="position-fixed bottom-0 start-50 translate-middle-x mb-4 shadow-lg bg-dark text-white px-4 py-2 rounded-pill d-flex align-items-center"
                 style={{ zIndex: 1050 }}
               >
-                <span>Merci ! Like enregistré <HeartCrack size={16} className="text-danger ms-2" /></span>
+                <span>Merci ! Mais on a déjà oublié votre like... (Pas de backend) <HeartCrack size={16} className="text-danger ms-2" /></span>
               </div>
             )}
 

@@ -8,5 +8,6 @@ export default defineConfig({
     host: '0.0.0.0', // Listen on all addresses
     port: 5173, // or your preferred port
     strictPort: false, // if true, won't try other ports if specified port is busy
-  }
+  },
+  base: '/', // Ensure this is set to root
 })
